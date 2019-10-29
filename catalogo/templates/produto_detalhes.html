@@ -1,0 +1,41 @@
+{% extends 'base_admin.html' %} 
+{% load static %}
+{% block title %}  Detalhes {{ produto.nome }} | {{ block.super }} {% endblock %}
+    {% block main %}
+
+    {% block subtitulo %}
+    Editar Produto
+    {% endblock %}
+    
+    {% block conteudo2 %}
+                    
+    <form method="POST">
+        {% csrf_token %}
+        <br><center>
+            <label class="control-label">Nome</label>
+            <input type="text" value="{{ produto.nome }}" name="nome"class="form-control"><br>
+            
+            <label class="control-label">Categoria</label><br>
+            <select name="categoria" required="" class="form-control">
+                <option value="">---------</option>
+                {% for i in categorias %}
+                {% if i.id == produto.categoria_id %}
+                <option value="{{ i.id }}" selected="">{{ i.nome }}</option>
+                {% else %}
+                <option value="{{ i.id }}">{{ i.nome }}</option>
+                {% endif %}
+                {% endfor %}
+            </select><br>
+            
+            <label class="control-label">Descrição</label><br>
+            <textarea name="descricao" cols="40" rows="10" class="form-control"> {{ produto.descricao }} </textarea><br>
+
+            <label class="control-label">Preço</label><br>
+            <input name="price" value="{{ price }}" step="0.01" required="" type="number"class="form-control"><br><br>
+
+        <button type="submit" name="button" value="update" class="btn btn-outline btn-primary">Salvar</button>&emsp;&emsp;
+        <button type="submit" name="button" value="update_continue" class="btn btn-outline btn-primary">Salvar e continuar editando</button>
+        </center>
+    </form>
+    {% endblock %}
+    {% endblock %}

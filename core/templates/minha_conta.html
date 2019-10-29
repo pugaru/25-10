@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Minha Conta | {{ block.super }} {% endblock %}
+
+{% block pagina %}
+<ol class="breadcrumb">
+  <li><a href="#">Início</a></li>
+  <li class="active">Minha Conta</li>
+</ol>
+<div class="row">
+    <div class="col-md-4">
+        <div class="list-group">
+          <a href="{% url 'minha_conta' %}" class="list-group-item active">Minha Conta</a>
+          <a href="{% url 'atualizar_usuario' %}" class="list-group-item">Alterar Dados</a>
+          <a href="{% url 'alterar_senha' %}" class="list-group-item">Alterar Senha</a>
+          <a href="{% url 'lista_pedido' %}" class="list-group-item">Pedidos</a>
+          <a href="{% url 'checkout:cart_item' %}" class="list-group-item">Carrinho</a>
+          {% if user.tipo == 'E' %}
+          <a href="{% url 'principal' %}" class="list-group-item">Principal</a>
+          {% endif%}
+        </div>
+    </div>
+    <div class="col-md-8">
+        {% block accounts_container %}
+            <h2>Bem vindo {{user.nome}}</h2>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

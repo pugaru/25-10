@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        {% extends 'base_admin.html' %}
+                {% block title %}  Estoque | {{ block.super }} {% endblock %}
+                
+</head>
+<body>
+    {% load static %}
+    {% block main %}
+    
+    {% block subtitulo %}
+    Estoque
+    {% endblock %}
+
+    {% block barra_lateral %}
+   <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="">
+
+                                <a href="#"><i class="fa fa-truck" aria-hidden="true"></i> Fornecedores <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                                    <li>
+                                        <a href="{% url 'estoque:fornecedores' %}"><center>Mostrar tudo</center></a>
+                                    </li>                                   
+                                    <li>
+                                        <a href="{% url 'estoque:cadastro_fornecedor' %}"><center>Cadastrar Fornecedor</center></a>
+                                    </li>
+                                </ul>
+                            </li>        
+
+                            <li class="">
+                                <a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Produtos <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">                                                                    
+                                    <li>
+                                        <a href="{% url 'estoque:estoque_produtos' %}"><center>Mostrar tudo</center></a>
+                                    </li>                                    
+                                    <li>
+                                        <a href="{% url 'estoque:cadastro_produto' %}"><center>Cadastrar Produto</center></a>
+                                    </li>                                                                    
+                                </ul>
+                            </li>
+
+                            <li class="">
+                                <a href="#"><i class="fa fa-industry" aria-hidden="true"></i> Matéria Prima <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                                    <li>
+                                        <a href="{% url 'estoque:estoque_materia' %}"><center>Mostrar tudo</center></a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'estoque:cadastro_materia' %}"><center>Cadastrar Matéria-Prima</center></a>
+                                    </li>                                    
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    {% endblock %}    
+
+    {% block conteudo1 %}
+        <h1 class="page-header"><center>Forncedores</center></h1>
+            <div class="panel-body">
+                <center><h4><a href="{% url 'estoque:fornecedores' %}"> clique aqui</a></h4></center>
+            </div>
+    {% endblock %}
+
+    {% block conteudo2 %}
+    <h1 class="page-header"><center>Produtos</center></h1>
+    <div class="panel-body">
+        <center><h4><a href="{% url 'estoque:estoque_produtos' %}"> clique aqui</a></h4></center>
+    </div>
+    {% endblock %}
+
+    {% block conteudo3 %}
+    <h1 class="page-header"><center>Matéria-Prima</center></h1>
+    <div class="panel-body">
+        <center><h4><a href="{% url 'estoque:estoque_materia' %}"> clique aqui</a></h4></center> 
+        
+    </div>
+    {% endblock %}
+
+
+
+
+    {% endblock %}
+</body>
+</html>

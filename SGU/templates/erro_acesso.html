@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/css/erro_acesso.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico">
+        <link href="/static/css/startmin.css" rel="stylesheet">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">        
+        <title>Ooops.!</title>
+</head>
+<body>
+
+    {% load static %}
+	<br>
+    <img src="{% static 'img/you-shall-not-pass.jpg' %}" alt="Não deu certo ¯\_(ツ)_/¯"><br>
+    <center>Ooops.!</center>
+    <center><p>Parece que você não tem permissão para estar aqui... ¯\_(ツ)_/¯ </p></center><br>
+    <center><button type="button" onclick="goBack()" class="btn btn-outline btn-default">Voltar</button></center>
+
+<script>function goBack() {window.history.back();}</script>
+</body>
+</html>
+

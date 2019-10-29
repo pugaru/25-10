@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        {% extends 'base_admin.html' %}
+                {% block title %} Detalhes {% endblock %}
+                
+</head>
+<body>
+    {% load static %}
+    {% block main %}
+
+    {% block subtitulo %}
+    Editar conta
+    {% endblock %}
+    
+    {% block conteudo2 %}
+    {% load bootstrap3 %}
+    <form method="POST">
+        {% csrf_token %}
+        <center>
+        <h3>Username: {{ detalhes.username }}</h3>
+        <h3>Nome:</h3>
+        <input type="text" value="{{ detalhes.nome }}" name="nome" class="form-manual">
+        <h3>E-mail:</h3>
+        <input type="text" value="{{ detalhes.email }}" name="email" class="form-manual"><br>
+        <a href="{% url 'sgu:chg_pass' %}">Mudar minha senha</a><br><br>
+        {% for i in grupos %}
+            {% if i in perms %}
+                <label>{{ i }} <input type="checkbox" name="grupo" value="{{ i }}" checked></label>
+            {% else %}
+                <label>{{ i }} <input type="checkbox" name="grupo" value="{{ i }}"></label>
+            {% endif %}
+        {% endfor %}
+        {% if detalhes.is_active == True %}
+            <p><label>Ativo <input type="checkbox" name="is_active" checked></label>
+        {% else %}
+            <p><label>Ativo <input type="checkbox" name="is_active"></label>
+        {% endif %}
+        <p><button type="submit" name="button" value="update" class="btn btn-outline btn-primary">Salvar</button>&ensp;&ensp;
+        <button type="submit" name="button" value="update_continue" class="btn btn-outline btn-primary">Salvar e continuar editando</button>
+    </form>
+    </center>
+    {% endblock %}
+    {% endblock %}
+</body>
+</html>

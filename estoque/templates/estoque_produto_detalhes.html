@@ -1,0 +1,22 @@
+{% extends 'base_admin.html' %} 
+{% load static %}
+{% load thumbnail %}
+{% load bootstrap3 %}
+    {% block main %}
+
+    {% block subtitulo %}
+    Editar Produto | {{ block.super }}
+    {% endblock %}
+    
+    {% block conteudo2 %}
+    <form enctype="multipart/form-data" method="POST" data-ajax="false">
+        {% csrf_token %}
+        <center>
+            {% bootstrap_form form %}<br> 
+
+        <button type="submit" name="button" value="update" class="btn btn-outline btn-primary">Salvar</button>&emsp;&emsp;
+        <button type="submit" name="button" value="update_continue" class="btn btn-outline btn-primary">Salvar e continuar editando</button>
+        </center>
+    </form>
+    {% endblock %}
+    {% endblock %}

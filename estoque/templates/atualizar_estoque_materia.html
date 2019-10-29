@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% extends 'base_admin.html' %}
+        {% block title %}  Atualizar {{ materia.id }} | {{ block.super }} {% endblock %}
+    </head>
+<body>
+{% block main %}
+
+{% block subtitulo %}
+    Atualizar Estoque de Matérias-Primas
+{% endblock %}
+
+{% block conteudo2 %}
+{% load bootstrap3 %}
+
+    <section>
+        <form enctype="multipart/form-data" method="POST" data-ajax="false">
+            {% csrf_token %}
+            <center>
+                <div id="materias">
+                    Matéria-Prima: 
+                    <select name="materia">
+                        <option value=""></option>
+                        {% for materia in materias %}
+                        <option value="{{ materia.id }}">{{ materia.materia_prima }} || {{ materia.cor }} || {{ materia.tamanho }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <br>
+                Tipo:
+                <select name="tipo">
+                    <option value=""></option>
+                    <option value="adicionar">Adicionar</option>
+                    <option value="remover">Remover</option>
+                </select>
+                <br>
+                <br>
+                Quantidade:
+                <input type="number" name="quantidade">
+                <br>
+                <br>
+            <button type="submit" name="button" value="update" class="btn btn-outline btn-primary" >Atualizar</button>
+            <button class="btn btn-outline btn-danger" onclick="goBack()">Cancelar</button>
+            </center>
+        </form>
+    </section>
+{% endblock %}    
+{% endblock %}
+</body>
+</html>

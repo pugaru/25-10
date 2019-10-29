@@ -1,0 +1,80 @@
+body{
+    background-image: url("/static/img/2.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+@-ms-viewport{
+  width: device-width;
+}
+.inner{
+    margin-left: auto;
+    margin-top: auto;
+    margin-right: auto;
+    max-width: fit-content;
+    padding: 55px;
+    padding-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 10px 10px 100px #000000;
+    border-radius: 52px;
+}
+
+.inneroff{
+  margin-left: auto;
+  margin-top: 5%;
+  margin-right: auto;
+  max-width: fit-content;
+  padding: 55px;
+  padding-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 10px 10px 100px #000000;
+  border-radius: 52px;
+}
+
+.button {
+    background-color: #1f417b;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    margin-left: 0px;
+    }
+.button:hover {
+-webkit-box-shadow: 2px 9px 108px 13px rgba(0,0,0,1);
+-moz-box-shadow: 2px 9px 108px 13px rgba(0,0,0,1);
+box-shadow: 2px 9px 108px 13px rgba(0,0,0,1);
+}
+
+
+fonte{
+    font-size: 20px;
+    font-family:"arial";
+    color:#343432;
+}
+
+titulo{
+    font-size: 45px;
+    font-family:"Courier New";
+    color:#343432;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+  position: relative;
+  color: #535353
+	}
+a:link {
+  color: #535353;
+  font-size: 14px;
+}
+a:hover{
+  color: #1f417b;
+  text-decoration:underline;
+}

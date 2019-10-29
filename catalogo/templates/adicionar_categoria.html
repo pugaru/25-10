@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% extends 'base_admin.html' %}
+        {% block title %}  Adicionar categoria | {{ block.super }} {% endblock %}
+
+    </head>
+<body>
+{% block main %}
+
+{% block subtitulo %}
+        Adicionar Categoria
+{% endblock %}
+
+{% block conteudo2 %}
+{% load bootstrap3 %}
+    <section>
+        <form method="POST">
+            {% csrf_token %}
+            <center>
+            {% bootstrap_form form %}<br>
+            <button type="submit" name="button" value="update" class="btn btn-outline btn-primary" >Cadastrar</button>&emsp;
+            <button class="btn btn-outline btn-danger" onclick="goBack()">Cancelar</button>
+            </center>
+        </form>
+    </section>
+
+{% endblock %}
+{% endblock %}
+</body>
+</html>

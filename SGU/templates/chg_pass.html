@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        {% extends 'base_admin.html' %}
+                {% block title %} Mudar senha {% endblock %}
+                
+</head>
+<body>
+    {% load static %}
+
+    {% block subtitulo %}
+    Mudar senha
+    {% endblock %}
+    {% block conteudo3 %}
+<div>
+<section ><br><br>
+    <form method="POST" action=" ">
+            {% csrf_token %}
+            <center>
+            <label class="control-label">Senha anterior</label><br><br>
+            <input type = "password" name = "pass_old" class="form-control"/><br><br>
+
+            <label class="control-label">Nova senha</label><br><br>
+            <input type = "password" name = "password" class="form-control"/><br><br>
+
+            <input type='submit' value='Mudar' class="btn btn-default"/>
+            </center>
+    </form>
+</section></div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        {% include 'menu_sup.html' %}
+        <title>Fonecedores</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="/static/css/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="/static/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="/static/css/dataTables/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="/static/css/startmin.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    </head>
+    <body>
+</nav></div>
+
+<!--AREA TABELA -->
+
+<!--AREA TABELA -->
+
+<!--AREA TABELA -->
+
+        <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Fornecedores</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                
+                            <div class="panel-body">
+                                <center><h4><a href="{% url 'estoque:cadastro_fornecedor' %}"> Cadastrar fornecedor</a></h4></center>
+                            <br>
+                            
+                            <form method="POST">
+                                {% csrf_token %}
+                                <h2>Usuários Internos</h2>
+                                <div class="dataTable_wrapper">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th> Nome </th>
+                                                <th> Tipo </th>
+                                                <th> E-Mail </th>
+                                                <th> Telefone </th>
+                                                <th> Deletar </th>
+                                                <th> Editar </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for i in fornecedores %}
+                                            <td>{{ i.nome }}</td> 
+                                            <td> {{ i.tipo }} </td>
+                                            <td> {{ i.email }} </td> 
+                                            <td> {{ i.telefone }} </td> 
+                                            <td><button type="submit" name="delete" value="{{ i.id }}">Delete</button></td>
+                                            <td><a href="{{ i.get_absolute_url }}">Editar</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                                <!-- /.table-responsive -->
+
+        <!-- jQuery -->
+        <script src="/static/js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/static/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="/static/js/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="/static/js/dataTables/jquery.dataTables.min.js"></script>
+        <script src="/static/js/dataTables/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/static/js/startmin.js"></script>
+
+        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+        <script>
+            $(document).ready(function() {
+                $('#dataTables-example').DataTable({
+                        responsive: true
+                });
+            });
+        </script>
+
+    </body>
+</html>

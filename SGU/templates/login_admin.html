@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        {% extends 'baseLogin.html' %}
+                {% block title %}  Login  {% endblock %}
+
+</head>
+<body>
+    {% load static %}
+    {% block subtitulo %} <titulo> Login </titulo> {% endblock %}  
+
+    {% block conteudo %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">
+			{{ message }}
+		</div>
+	{% endfor %}
+    <label>Usuário</label>
+    <br><input class="w3-input" name = "username" />
+    <br><p><label>Senha</label>
+    <input class="w3-input" type = "password" name = "password" /><p>
+    <a href="{% url 'sgu:password_reset' %}">Esqueceu sua senha?</a><br><br>
+    <button type="submit" class="button">
+    {% bootstrap_icon "glyphicon glyphicon-log-in" %} &emsp;entrar</button>
+
+    {% endblock %}    
+
+
+</body>
+</html>

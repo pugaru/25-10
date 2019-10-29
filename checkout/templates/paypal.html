@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+Pagamento via Paypal
+{% endblock %}
+
+{% block pagina %}
+<ol class="breadcrumb" style="background-color: #ffffff;">
+  <li><a href="{% url 'index' %}" style="font-size: 20px">Início</a> > <a href="{% url 'checkout:cart_item' %}" style="font-size: 20px">Carrinho de Compras</a> > <class="active">Pagamento via Paypal</li>
+</ol>
+<div class="page-header"><center>
+    <h1>Você está sendo redirecionado para o paypal</h1></center>
+</div>
+<div id="paypal" class="row" style="margin-left: 45%; margin-top:5%; margin-bottom: 6% "><center>
+    {{ form.render }}
+
+</center></div>
+{% endblock %}
+
+{% block scripts %}
+<center>
+<script type="text/javascript">
+    $(function(){
+        $("#paypal form").submit();
+    });
+</script>
+</center>
+{% endblock %}

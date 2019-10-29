@@ -1,0 +1,30 @@
+{% extends 'base_admin.html' %} 
+{% load static %}
+    {% block main %}
+
+    {% block subtitulo %}
+    Editar fornecedor
+    {% endblock %}
+    
+    {% block conteudo2 %}
+    <form method="POST">
+        {% csrf_token %}
+        <br><center>
+            <label class="control-label">Nome</label>
+            <input type="text" value="{{ fornecedor.nome }}" name="nome"class="form-control"><br>           
+            
+            <label class="control-label">Tipo</label>
+            <input type="text" value="{{ fornecedor.tipo }}" name="tipo"class="form-control"><br>  
+
+            <label class="control-label">E-mail</label>
+            <input type="text" value="{{ fornecedor.email }}" name="email"class="form-control"><br>  
+
+            <label class="control-label">Telefone</label><br>
+            <input name="telefone" value="{{ fornecedor.telefone }}" type="number"class="form-control"><br><br>
+
+        <button type="submit" name="button" value="update" class="btn btn-outline btn-primary">Salvar</button>&emsp;&emsp;
+        <button type="submit" name="button" value="update_continue" class="btn btn-outline btn-primary">Salvar e continuar editando</button>
+        </center>
+    </form>
+    {% endblock %}
+    {% endblock %}

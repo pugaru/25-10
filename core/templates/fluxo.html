@@ -1,0 +1,37 @@
+	<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        {% extends 'base_admin.html' %}
+                {% block title %}  Fluxo de caixa | {{ block.super }}  {% endblock %}
+                
+</head>
+<body>
+    {% load static %}
+    {% block main %}
+
+    {% block subtitulo %}
+    Fluxo de caixa
+    {% endblock %}    
+    
+    {% block barra_lateral %}
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+    {% endblock %}
+
+    {% block conteudo2 %}
+    <center>
+        <img src="{% static 'img/obras.png' %}" alt="Não deu certo ¯\_(ツ)_/¯"><br>
+    <h3><center>Onde está seu capacete!?</center></h3>
+    <h3><center><p>Estamos em Obras!!</p></center></h3><br>
+    </center>
+    {% endblock %}
+
+    
+    {% endblock %}
+</body>
+</html>

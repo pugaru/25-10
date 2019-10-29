@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block tittle %}
+    Pedido #{{ order.pk }}
+{% endblock %}
+
+{% block pagina %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+
+<div class="page-header" style="width: 50%;margin-left: 30%;">
+    <h1> Pedido Nº {{ pedido.pk }} </h1><br>
+
+<dl class="dl-horizontal" style="padding-right: 15%">
+    <h2>Detalhes do pedido :</h2><br>
+    <dt>Total R$ : </dt>
+    <dd>{{ object.total|floatformat:"2" }}</dd>
+    <dt>Situação :</dt>
+    <dd>{{ object.get_status_display }}</dd>
+    <dt>Data :</dt>
+    <dd>{{ object.criado|date:"d/m/Y H:i" }}</dd>
+    <dt>Meio de Pagamento :</dt>
+    <dd style="text-transform: uppercase;">{{ object.opcao_pagamento}}</dd>
+<br>
+
+<h2>Itens do Pedido :</h2><br>
+{% for item in object.items.all %}
+        <dt>Produto :</dt>
+        <dd>{{ item.produto }}</dd>
+        <dt>Quantidade :</dt>
+        <dd>{{ item.quantidade }}</dd>
+        <dt>Preço :</dt>
+        <dd>R$ {{ item.preco|floatformat:"2" }}</dd>
+    </dl></div><br><br>
+{% endfor %}
+</center>
+{% endblock %}

@@ -1,0 +1,13 @@
+insert into SGU_grupos (nome, link) values ('SGU','/sgu');
+insert into SGU_grupos (nome, link) values ('ESTOQUE','/estoque');
+insert into SGU_grupos (nome, link) values ('FLUXO','/fluxo');
+insert into SGU_grupos (nome, link) values ('PEDIDOS','/pedidos');
+insert into SGU_grupos (nome, link) values ('CATALOGO','/catalogo');
+
+insert into SGU_permissions (groups, usuario_id) values ('SGU', 1);
+insert into SGU_permissions (groups, usuario_id) values ('ESTOQUE', 1);
+insert into SGU_permissions (groups, usuario_id) values ('FLUXO', 1);
+insert into SGU_permissions (groups, usuario_id) values ('PEDIDOS', 1);
+insert into SGU_permissions (groups, usuario_id) values ('CATALOGO', 1);
+
+update SGU_usuario set tipo = 'E' where id = 1;

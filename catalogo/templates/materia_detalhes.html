@@ -1,0 +1,26 @@
+{% extends 'base_admin.html' %} 
+{% load static %}
+{% block title %}  Detalhes {{ materia.nome }} | {{ block.super }} {% endblock %}
+    {% block main %}
+
+    {% block subtitulo %}
+    Editar Matéria-Prima
+    {% endblock %}
+    
+    {% block conteudo2 %}
+                    
+    <form method="POST">
+        {% csrf_token %}
+        <br><center>
+            <label class="control-label">Nome</label>
+            <input type="text" value="{{ materia.nome }}" name="nome"class="form-control"><br>
+            
+            <label class="control-label">Descrição</label><br>
+            <textarea name="descricao" cols="40" rows="10" class="form-control"> {{ materia.descricao }} </textarea><br>
+
+        <button type="submit" name="button" value="update" class="btn btn-outline btn-primary">Salvar</button>&emsp;&emsp;
+        <button type="submit" name="button" value="update_continue" class="btn btn-outline btn-primary">Salvar e continuar editando</button>
+        </center>
+    </form>
+    {% endblock %}
+    {% endblock %}

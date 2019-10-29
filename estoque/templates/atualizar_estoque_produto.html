@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% extends 'base_admin.html' %}
+        {% block title %}  Atualizar {{ produto.produto }} | {{ block.super }} {% endblock %}
+    </head>
+<body>
+{% block main %}
+
+{% block subtitulo %}
+    Atualizar Estoque
+{% endblock %}
+
+{% block conteudo2 %}
+{% load bootstrap3 %}
+
+    <section>
+        <form enctype="multipart/form-data" method="POST" data-ajax="false">
+            {% csrf_token %}
+            <center>
+                <div id="produtos">
+                    Produto:
+                    <select name="produto" >
+                        <option value=""></option>
+                        {% for produto in produtos %}
+                        <option value="{{ produto.id }}">{{ produto.produto }} || {{ produto.cor }} || {{ produto.tamanho }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                Ação:
+                <select name="tipo">
+                    <option value=""></option>
+                    <option value="adicionar">Adicionar</option>
+                    <option value="remover">Remover</option>
+                </select>
+                <br>
+                <br>
+                Quantidade:
+                <input type="number" name="quantidade">
+                <br>
+                <br>
+            <button type="submit" name="button" value="update" class="btn btn-outline btn-primary" >Atualizar</button>
+            <button class="btn btn-outline btn-danger" onclick="goBack()">Cancelar</button>
+            </center>
+        </form>
+    </section>
+{% endblock %}    
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-128580397-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->	
+	
+	<title>
+		{% block tittle %}
+            NGKS_Shop
+		{% endblock %}
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/themify/themify-icons.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/elegant-font/html-css/style.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/lightbox2/css/lightbox.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body class="animsition">
+
+	<!-- header fixed -->
+	<div class="wrap_header fixed-header2 trans-0-4">
+		<!-- Logo -->
+		<a href="{% url 'index' %}" class="logo">
+			<img src="/static/images/icons/logo.jpg" alt="IMG-LOGO">
+		</a>
+
+		<!-- Menu -->
+		<div class="wrap_menu">
+			<nav class="menu">
+				<ul class="main_menu">
+					<li>
+						<a href="{% url 'index' %}">Home</a>
+					</li>
+		            <li>
+		            	<a data-toggle="dropdown" href="#"> Categorias <span class="caret"></span></a>
+		            	<ul class="sub_menu">
+		            		{% for categoria in categorias %}
+		            			<li><a href="{{ categoria.get_store_url }}">{{ categoria.nome }}</a></li>
+		            			{% endfor %}
+		            	</ul>					
+		            </li>
+
+					<li>
+						<a href="{% url 'lista_produtos' %}">Todos os Produtos</a>
+					</li>
+					
+					<li>
+						<a href="#">Sobre nós</a>
+					</li>
+					<li>
+						<a href="{% url 'contato' %}" >Contato</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Header Icon -->
+		<div class="header-icons">
+
+			<span class="linedivide1"></span>
+		{% if user.is_authenticated %}
+              <a href="{% url 'principal' %}" class="header-wrapicon1 dis-block">
+              	<img src="/static/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+              </a>
+              <span class="linedivide1"></span>
+              <li><a href="{% url 'logout' %}" class="s-text7">Sair</a> </li>
+            {% else %}
+              <li><a href="{% url 'loginEcommerce' %}" class="s-text7">Entrar</a> </li>
+              <span class="linedivide1"></span>
+              <li><a href="{% url 'registro' %}" class="s-text7">Não tem conta?</a> </li>
+            {% endif %}				
+
+
+			<span class="linedivide1"></span>
+
+			<div class="header-wrapicon2">
+				<img src="/static/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+				<span class="header-icons-noti">{{ quantidade }}</span>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+                                {% for item in itens %}
+                                <li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="/static/images/item-cart-01.jpg" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="{{ item.get_store_url }}" class="header-cart-item-name">
+                                            {{ item.produto.nome }}
+										</a>
+
+										<span class="header-cart-item-info">
+											{{ item.quantidade }} x ${{ item.preco }}
+										</span>
+									</div>
+								</li>
+                                {% endfor %}
+
+							</ul>
+
+							<div class="header-cart-total">
+								Total: ${{ total }}
+							</div>
+
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="{% url 'checkout:cart_item' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Carrinho
+									</a>
+								</div>
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a style="font-size: 13px" href="{% url 'checkout:checkout' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Finalizar Compra
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Header -->
+	<header class="header2">
+		<!-- Header desktop -->
+		<div class="container-menu-header-v2 p-t-26">
+			<div class="topbar2">
+				<div class="topbar-social">
+					<a href="https://www.facebook.com/ngksoficial/" class="topbar-social-item fa fa-facebook"></a>
+					<a href="https://www.instagram.com/ngksoficial/" class="topbar-social-item fa fa-instagram"></a>
+					<a href="https://www.youtube.com/channel/UC-xJmRtOku_jDVMlYXCfYaA" class="topbar-social-item fa fa-youtube-play"></a>
+				</div>
+
+				<!-- Logo2 -->
+				<a href="{% url 'index' %}" class="logo2">
+					<img src="/static/images/icons/logo.jpg" alt="IMG-LOGO">
+				</a>
+
+				<div class="topbar-child2">
+					
+			{% if user.is_authenticated %}
+					<!--  -->
+					<a href="{% url 'minha_conta' %}" class="header-wrapicon1 dis-block m-l-30">
+						<img src="/static/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+					</a>
+					<span class="linedivide1"></span>
+						<li><a href="{% url 'minha_conta' %}">Minha conta</a> </li>
+						<span class="linedivide1"></span>
+						<li><a href="{% url 'logout' %}" class="s-text7">Sair</a> </li>
+            {% else %}
+              <li><a href="{% url 'loginEcommerce' %}" class="s-text7">Entrar</a> </li>
+              <span class="linedivide1"></span>
+
+              <li><a href="{% url 'registro' %}" class="s-text7">Não tem conta?</a> </li>
+            {% endif %}
+            <span class="linedivide1"></span>
+					<div class="header-wrapicon2 m-r-13">
+						<img src="/static/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<span class="header-icons-noti">{{ quantidade }}</span>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+								{% for item in itens %}
+                                <li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="/static/images/item-cart-01.jpg" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="{{ item.get_store_url }}" class="header-cart-item-name">
+                                            {{ item.produto.nome }}
+										</a>
+
+										<span class="header-cart-item-info">
+											{{ item.quantidade }} x ${{ item.preco }}
+										</span>
+									</div>
+								</li>
+                                {% endfor %}
+                            </ul>
+
+							<div class="header-cart-total">
+								Total: ${{ total }}
+							</div>
+
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="{% url 'checkout:cart_item' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Carrinho
+									</a>
+								</div>
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a style="font-size: 13px" href="{% url 'checkout:checkout' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Finalizar Compra
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap_header">
+
+				<!-- Menu -->
+				<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li>
+								<a href="{% url 'index' %}">Home</a>
+							</li>
+		            		<li>
+		            			<a href="#"> Categorias <span class="caret"></span></a>
+		            			<ul class="sub_menu">
+			            		{% for categoria in categorias %}
+		            			<li><a href="{{ categoria.get_store_url }}">{{ categoria.nome }}</a></li>
+		            			{% endfor %}
+		            			</ul>					
+		            		</li>						
+
+							<li>
+								<a href="{% url 'lista_produtos' %}">Todos os Produtos</a>
+							</li>
+
+							<li>
+								<a href="#">Sobre nós</a>
+							</li>
+							<li>
+								<a href="{% url 'contato' %}" >Contato</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+				<!-- Header Icon -->
+				<div class="header-icons">
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap_header_mobile">
+			<!-- Logo moblie -->
+			<a href="{% url 'index' %}" class="logo-mobile">
+				<img src="/static/images/icons/logo.jpg" alt="IMG-LOGO">
+			</a>
+
+			<!-- Button show menu -->
+	
+			<div class="btn-show-menu">
+				<!-- Header Icon mobile -->
+				<div class="header-icons-mobile">
+					{% if user.is_authenticated %}
+					<a href="{% url 'principal' %}" class="header-wrapicon1 dis-block">
+						<img src="/static/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+					</a>
+					<span class="linedivide2"></span>
+					{% endif %}
+
+					<div class="header-wrapicon2">
+						<img src="/static/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<span class="header-icons-noti">{{ quantidade }}</span>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+                                {% for item in itens %}
+                                <li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="/static/images/item-cart-01.jpg" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="{{ item.get_store_url }}" class="header-cart-item-name">
+                                            {{ item.produto.nome }}
+										</a>
+
+										<span class="header-cart-item-info">
+											{{ item.quantidade }} x ${{ item.preco }}
+										</span>
+									</div>
+								</li>
+                                {% endfor %}
+                                
+
+							</ul>
+
+							<div class="header-cart-total">
+								Total: ${{ total }}
+							</div>
+
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="{% url 'checkout:cart_item' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Carrinho
+									</a>
+								</div>
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a style="font-size: 12px" href="{% url 'checkout:checkout' %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Finalizar Compra
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div class="wrap-side-menu" >
+			<nav class="side-menu">
+				<ul class="main-menu">
+					{% if user.is_authenticated %}
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<span class="topbar-child1">
+							Olá {{ user.nome }}
+						</span>
+					</li>
+					{% endif %}
+
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<span class="topbar-child1">
+								{% if user.is_authenticated %}
+								<a href="{% url 'logout' %}" class="topbar-child1">Sair</a>
+                    			{% else %}
+                    			<a href="{% url 'loginEcommerce' %}" class="topbar-child1">Entrar</a><br>
+                    			<a href="{% url 'registro' %}" class="topbar-child1">Não tem conta?</a>
+                    			{% endif %}
+						</span>
+					</li>	
+
+<li class="item-menu-mobile">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Categorias <span class="caret"></span></a>
+              <ul class="dropdown-menu" style="width: 60%; ">
+                    {% for categoria in categorias %}
+                    <center style="padding-bottom: 10px; padding-top: 10px">
+                      <li><a href="{{ categoria.get_store_url }}">{{ categoria.nome }}</a></li></center>
+                      {% endfor %}
+              </ul>
+					</li>			
+
+					<li class="item-menu-mobile">
+						<a href="{% url 'lista_produtos' %}">Todos os Produtos</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="#">Sobre nós</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="{% url 'contato' %}" >Contato</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+{% block messages %}
+    {% for message in messages %}
+        <center>
+		<div class="alert alert-{{ message.tags }}" style="width: 60%; ">
+			{{ message }}
+		</div>
+        </center>
+    {% endfor %}
+{% endblock %}
+{% block pagina %}
+
+{% endblock %}
+
+	<!-- Footer -->
+<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+		<div class="flex-w p-b-90" style="
+    padding-bottom: 0px;
+">
+			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+				<h4 class="s-text12 p-b-30">
+					Converse conosco!
+				</h4>
+
+				<div>
+					<p class="s-text7 w-size27">
+						Alguma dúvida? Entre em contato pelo facebook ou através de nosso formulário de contato!
+					</p>
+
+					<div class="flex-m p-t-30">
+						<a href="https://www.facebook.com/ngksoficial/" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+						<a href="https://www.instagram.com/ngksoficial/" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+						<a href="https://www.youtube.com/channel/UC-xJmRtOku_jDVMlYXCfYaA" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Categorias
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						{% for categoria in categorias %}
+						<a href="{{ categoria.get_store_url }}" class="s-text7">
+						{{ categoria.nome }}</a>
+					</li>
+						{% endfor %}
+				</ul>
+
+			</div>
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Links
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						<a href= "{% url 'lista_produtos' %}" class="s-text7">
+							Produtos
+						</a>
+					<li class="p-b-9">
+						<a href="{% url 'principal' %}" class="s-text7">
+							Minha conta
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Ajuda
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						<a href= "{% url 'contato' %}" class="s-text7">
+							Contato
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Política de troca e devolução
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							FAQs
+						</a>
+					</li>
+				</ul>
+			</div>
+			<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fngksoficial%2F&tabs&width=340&height=181&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="181" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+		</div>
+
+		<div class="t-center p-l-15 p-r-15">
+			Pague com<br><br>
+			<a href="https://www.paypal.com">
+				<img class="h-size2" src="/static/images/icons/paypal.png" alt="IMG-PAYPAL">
+			</a>
+
+			<a href="https://pagseguro.uol.com.br/#rmcl">
+				<img class="h-size2" src="/static/images/icons/pagseguro.png" alt="IMG-PAGSEGURO">
+			</a>
+
+			<div class="t-center s-text8 p-t-20">
+				Copyright © 2018 All rights reserved. <br> This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com/wp/template/fashe/" target="_blank">Colorlib fashe</a> <br><p style="text-decoration: underline;">and modified by AlphaDeveloper</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top bg0-hov" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</span>
+	</div>
+
+	<!-- Container Selection1 -->
+	<div id="dropDownSelect1"></div>
+
+	<!-- Modal Video 01-->
+	<div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
+
+		<div class="modal-dialog" role="document" data-dismiss="modal">
+			<div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
+
+			<div class="wrap-video-mo-01">
+				<div class="w-full wrap-pic-w op-0-0"><img src="/static/images/icons/video-16-9.jpg" alt="IMG"></div>
+				<div class="video-mo-01">
+					<iframe src="https://www.youtube.com/embed/_JLxpa6LtUI?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/bootstrap/js/popper.js"></script>
+	<script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/select2/select2.min.js"></script>
+	<script type="text/javascript">
+		$(".selection-1").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/slick/slick.min.js"></script>
+	<script type="text/javascript" src="/static/js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/lightbox2/js/lightbox.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/sweetalert/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		$('.block2-btn-addcart').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "Adicionado ao Carrinho !", "successo");
+			});
+		});
+
+		$('.block2-btn-addwishlist').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "Adicionado à lista de desejos!", "successo");
+			});
+		});
+	</script>
+
+<!--===============================================================================================-->
+	<script type="text/javascript" src="/static/vendor/parallax100/parallax100.js"></script>
+	<script type="text/javascript">
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="/static/js/main.js"></script>
+
+
+
+
+
+
+
+
+

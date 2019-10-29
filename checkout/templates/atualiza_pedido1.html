@@ -1,0 +1,34 @@
+{% extends 'base_admin.html' %} 
+{% load static %}
+{% load thumbnail %}
+{% block title %}  Atualizar {{ produto.produto }} | {{ block.super }} {% endblock %}
+    {% block main %}
+
+    {% block subtitulo %}
+    Editar Produto
+    {% endblock %}
+    
+    {% block conteudo2 %}
+    <form method="POST">
+        {% csrf_token %}
+        <br><center>
+            <img src="{{ produto.imagem|thumbnail_url:'imagem_produto' }}" alt=""/>
+            <br><br><br>
+            <label class="control-label">Produto</label>
+            <input type="text" value="{{ produto.produto }}" name="produto"class="form-control"><br>           
+            
+            <label class="control-label">Identificador</label>
+            <input type="text" value="{{ pedido.pk }}" name="slug"class="form-control"><br>                   
+
+            <label class="control-label">Cor</label>
+            <input type="text" value="{{ produto.cor }}" name="cor"class="form-control"><br>  
+
+            <label class="control-label">Tamanho</label>
+            <input type="text" value="{{ produto.tamanho }}" name="tamanho"class="form-control"><br>  
+
+        <button type="submit" name="button" value="update" class="btn btn-outline btn-primary">Salvar</button>&emsp;&emsp;
+        <button type="submit" name="button" value="update_continue" class="btn btn-outline btn-primary">Salvar e continuar editando</button>
+        </center>
+    </form>
+    {% endblock %}
+    {% endblock %}
